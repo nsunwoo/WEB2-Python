@@ -13,7 +13,14 @@ else:
     pageId = 'Welcome'
     description = '웹이에요.'
 
-print('''<!DOCTYPE html>
+def getList():
+    files = os.listdir('data')
+    listStr = ''
+    for item in files:
+        listStr = listStr + f'<li><a href="index.py?id={item}">{item}</a></li>\n\t\t'
+    return listStr
+
+print(f'''<!DOCTYPE html>
 <html>
 <head>
     <title>WEB1 - Welcome</title>
@@ -21,13 +28,9 @@ print('''<!DOCTYPE html>
 </head>
 <body>
     <h1><a href="index.py">WEB</a></h1>
-    <ol>''')
-
-files = os.listdir('data')
-for item in files:
-    print(f'        <li><a href="index.py?id={item}">{item}</a></li>')
-
-print(f'''    </ol>
+    <ol>
+        {getList()}
+    </ol>
     <a href="create.py">create</a>
     <form action="process_create.py" method="post">
         <p><input type="text" name="title" placeholder="제목"></p>

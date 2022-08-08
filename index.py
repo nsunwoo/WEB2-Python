@@ -20,7 +20,14 @@ else:
     update_link = ''
     delete_action = ''
 
-print('''<!DOCTYPE html>
+def getList():
+    files = os.listdir('data')
+    listStr = ''
+    for item in files:
+        listStr = listStr + f'<li><a href="index.py?id={item}">{item}</a></li>\n\t\t'
+    return listStr
+
+print(f'''<!DOCTYPE html>
 <html>
 <head>
     <title>WEB1 - Welcome</title>
@@ -28,13 +35,9 @@ print('''<!DOCTYPE html>
 </head>
 <body>
     <h1><a href="index.py">WEB</a></h1>
-    <ol>''')
-
-files = os.listdir('data')
-for item in files:
-    print(f'        <li><a href="index.py?id={item}">{item}</a></li>')
-
-print(f'''    </ol>
+    <ol>
+        {getList()}
+    </ol>
     <a href="create.py">create</a>
     {update_link}
     {delete_action}
