@@ -3,7 +3,7 @@
 print("Content-Type: text/html")
 print()
 
-import cgi, os
+import cgi, os, view
 
 form = cgi.FieldStorage()
 if 'id' in form:
@@ -12,13 +12,6 @@ if 'id' in form:
 else:
     pageId = 'Welcome'
     description = '웹이에요.'
-
-def getList():
-    files = os.listdir('data')
-    listStr = ''
-    for item in files:
-        listStr = listStr + f'<li><a href="index.py?id={item}">{item}</a></li>\n\t\t'
-    return listStr
 
 print(f'''<!DOCTYPE html>
 <html>
@@ -29,7 +22,7 @@ print(f'''<!DOCTYPE html>
 <body>
     <h1><a href="index.py">WEB</a></h1>
     <ol>
-        {getList()}
+        {view.getList()}
     </ol>
     <a href="create.py">create</a>
     <form action="process_update.py" method="post">
