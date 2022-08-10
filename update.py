@@ -3,7 +3,7 @@
 print("Content-Type: text/html")
 print()
 
-import cgi, os, view
+import cgi, view
 
 form = cgi.FieldStorage()
 if 'id' in form:

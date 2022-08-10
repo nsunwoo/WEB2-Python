@@ -3,14 +3,16 @@
 print("Content-Type: text/html")
 print()
 
-import cgi, os, view
+import cgi, view, html_sanitizer
+
+sanitizer = html_sanitizer.Sanitizer()
 
 form = cgi.FieldStorage()
 if 'id' in form:
     pageId = form["id"].value
+    pageId = sanitizer.sanitize(pageId)
     description = open(f'data/{pageId}', 'r', encoding='utf-8').read()
-    description = description.replace('<', '&lt;')
-    description = description.replace('>', '&gt;')
+    description = sanitizer.sanitize(description)
     update_link = f'<a href="update.py?id={pageId}">update</a>'
     delete_action = f'''<form action="process_delete.py" method="post">
         <input type="hidden" name="pageId" value="{pageId}">
